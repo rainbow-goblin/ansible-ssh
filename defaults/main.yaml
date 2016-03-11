@@ -3,9 +3,10 @@
 # Defaults for client
 ssh_config:
   '*':
-    ForwardX11Trusted: 'yes'
-    GSSAPIAuthentication: 'yes'
+    ForwardX11Trusted: 'no'
+    GSSAPIAuthentication: 'no'
     Protocol: 2
+    ServerAliveInterval: 10
     SendEnv:
       - LANG LC_CTYPE LC_NUMERIC LC_TIME LC_COLLATE LC_MONETARY LC_MESSAGES
       - LC_IDENTIFICATION LC_ALL
@@ -13,15 +14,32 @@ ssh_config:
 
 # Defaults for server
 sshd_config:
-  ChallengeResponseAuthentication: 'no'
-  GSSAPIAuthentication: 'yes'
-  GSSAPICleanupCredentials: 'yes'
-  PasswordAuthentication: 'yes'
+  Port: 22
   Protocol: 2
-  Subsystem: sftp /usr/libexec/openssh/sftp-server
-  SyslogFacility: AUTHPRIV
+  UsePrivilegeSeparation: 'yes'
+  ChallengeResponseAuthentication: 'no'
+  GSSAPIAuthentication: 'no'
+  GSSAPICleanupCredentials: 'yes'
+  PasswordAuthentication: 'no'
+  ClientAliveInterval: 0
+  AcceptEnv: 'LANG LC_*'
+  Subsystem: 'sftp internal-sftp'
+  SyslogFacility: 'AUTHPRIV'
+  LogLevel: 'INFO'
+  LoginGraceTime: '20000'
+  PermitRootLogin: 'yes'
+  StrictModes: 'yes'
+  RSAAuthentication: 'yes'
+  PubkeyAuthentication: 'yes'
+  AuthorizedKeysFile: '%h/.ssh/authorized_keys'
+  IgnoreRhosts: 'yes'
+  AllowTcpForwarding: 'no'
+  X11Forwarding: 'no'
+  HostbasedAuthentication: 'no'
+  PermitEmptyPasswords: 'no'
+  PrintMotd: 'no'
+  PrintLastLog: 'yes'
+  TCPKeepAlive: 'yes'
   UsePAM: 'yes'
-
-# Allow to add custom SSH banner
-ssh_banner_location: /etc/ssh/banner
-ssh_banner: ''
+  UseDNS: 'no'
+  AllowUsers: 'root'
