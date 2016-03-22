@@ -27,7 +27,7 @@ sshd_config:
   SyslogFacility: 'AUTHPRIV'
   LogLevel: 'INFO'
   LoginGraceTime: '20000'
-  PermitRootLogin: 'yes'
+  PermitRootLogin: 'without-password'
   StrictModes: 'yes'
   RSAAuthentication: 'yes'
   PubkeyAuthentication: 'yes'
