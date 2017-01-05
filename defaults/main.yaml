@@ -20,8 +20,9 @@ sshd_config:
   ChallengeResponseAuthentication: 'no'
   GSSAPIAuthentication: 'no'
   GSSAPICleanupCredentials: 'yes'
-  PasswordAuthentication: 'no'
+  PasswordAuthentication: 'yes'
   ClientAliveInterval: 0
+  ClientAliveCountMax: 0
   AcceptEnv: 'LANG LC_*'
   Subsystem: 'sftp internal-sftp'
   SyslogFacility: 'AUTHPRIV'
@@ -33,6 +34,7 @@ sshd_config:
   PubkeyAuthentication: 'yes'
   AuthorizedKeysFile: '%h/.ssh/authorized_keys'
   IgnoreRhosts: 'yes'
+  IgnoreUserKnownHosts: 'no'
   AllowTcpForwarding: 'no'
   X11Forwarding: 'no'
   HostbasedAuthentication: 'no'
@@ -42,4 +44,3 @@ sshd_config:
   TCPKeepAlive: 'yes'
   UsePAM: 'yes'
   UseDNS: 'no'
-  AllowUsers: 'root'
